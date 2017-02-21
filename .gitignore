@@ -1,0 +1,7 @@
+.env
+.DS_Store
+config.codekit
+craft/storage/backups/
+craft/storage/runtime/
+sass/.sass-cache/
+
