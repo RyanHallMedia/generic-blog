@@ -1,28 +1,70 @@
-{#
- # Homepage template
- # ---------------
- #
- # When this template gets loaded, it will be because someone has accessed
- # http://yoursite.com/ (without any URI). Craft checks to see if you have
- # a Single section set to be the Homepage (as you do, by default), and
- # loads the section’s Template (this file). A special ‘entry’ variable
- # will already be set for you, assigned to the Homepage entry.
- #
- # It's worth noting that even if you didn't have a Homepage Single section,
- # as long as this template remains at craft/templates/index.html, it
- # would still be the one to get loaded when accessing http://yoursite.com/,
- # albeit without an ‘entry’ variable already set for you.
- #
- # See this page for more details on how Craft routes requests:
- # http://craftcms.com/docs/routing
- #}
-
 {% extends "_layout" %}
+{% set title = "Blog" %}
 
 {% block content %}
 	<h1>{{ entry.title }}</h1>
 
 	{{ entry.body }}
+
+<!-- header -->
+  <div id="contentHero" class="slideshow parallax">
+    <div class="scaleMask" style="height:500px;">
+      {% set image = entry.heroImage.first() %}
+      {% if image %}
+        <div class="parallax-background" style="height:600px; width:100%; margin:0 auto; background-image:url('{{ image.url }}');background-position:center;background-size:cover;" data-photo-source="{{ image.url }}">
+        </div>
+      {% endif %}
+      <div class="heroOverlay on"></div>
+      <div class="heroText center">
+        <h5>{{ entry.blogIndexSubtitle }}</h5>
+        <h1>{{ entry.blogIndexTitle }}</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT SECTION -->
+  <div class="grey" style="border: 10px solid #f6f8fa;padding:10px;">
+    <div class="subscribe row">
+      <h4 class="col-xs-12 col-sm-6 hidden-xs" style="text-align:right;">Subscribe to our newsletter</h4>
+      <h4 class="col-xs-12 col-sm-6 visible-xs-inline-block" style="text-align:center;">Subscribe to our newsletter</h4>
+      <div class="input col-xs-12 col-sm-6">
+        <form action="" method="post" id="subForm">
+          <input id="fieldEmail" name="cm-hthlulr-hthlulr" type="email" placeholder="email@email.com" required />
+          <button id="subscribeButton" type="submit" class="bttn med" style="padding: 8.5px 15px;">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- the list -->
+  <div class="greylt bloglist center">
+    <h3>Recent posts</h3>
+    <div class="row">
+      {% for entry in craft.entries.section('blog').find() %}
+        <a href="/blog/{{ entry.slug }}" class="col-xs-12 col-sm-6 col-md-4 post">
+          {% set image = entry.thumbnail.first() %}
+          {% if image %}
+            <div class="img" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+            {% else %}
+              <!-- Fallback to hero image if no thumbnail -->
+              {% set image = entry.heroImage.first() %}
+              {% if image %}
+                <div class="img" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+              {% endif%}
+
+            {% endif %}
+            <div class="information">
+              <h5>{{ entry.postTitle }}</h5>
+              <div class="clearfix"></div>
+              <p>
+                {{ entry.blogSummary }}
+              </p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    <div class="clearfix"></div>
+  </div>
 
 	<h2>Recent News</h2>
 	<ul>
@@ -30,4 +72,23 @@
 			<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
 		{% endfor %}
 	</ul>
+
+  {% block pagescripts %}
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(this).matchHeightOnBoxes();
+      });
+
+      $.fn.matchHeightOnBoxes = function(){
+        var maxHeight = -1;
+        // blog post same height
+        $('a.post .information').each(function(){
+            maxHeight = maxHeight > $(this).height() ? maxHeight : $(this).height();
+        });
+
+        $('a.post .information').height(maxHeight);
+      };
+    </script>
+  {% endblock %}
+
 {% endblock %}

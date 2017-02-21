@@ -1,0 +1,219 @@
+{% extends "_layout" %}
+{% set title = entry.title %}
+
+
+{% block pagestyles %}
+{% endblock %}
+
+  {% block content %}
+
+  {% set image = entry.heroImage.first() %}
+  {% if image %}
+    <div id="contentHero" class="slideshow parallax">
+      <div class="scaleMask" style="width:100%; height:650px; overflow:hidden; margin:0; padding:0; background-color:#fff;">
+        <div class="parallax-background {% if entry.removeBlur %} noBlur {% endif %}" style="height:750px; width:100%; margin:0 auto; background-image:url({{ image.url }});background-position:center;background-size:cover;" data-photo-source="{{ image.url }}"></div>
+
+        <div class="heroOverlay on"></div>
+
+        <div class="heroText center" style="opacity:1;">
+
+        <h5><a href="#">{{ entry.blogCategory }}</a></h5>
+        <h1>{{ entry.title }}</h1>
+
+        <div class="ert">
+          <h5 class="light">{{ entry.ert }} min read</h5>
+        </div>
+          <div class="author">
+            {% if entry.author.photoUrl %}
+              <div class="img" style="background:url({{ entry.author.photoUrl }})no-repeat center;background-size:cover;"></div>
+            {% endif %}
+
+            <span class="date-name">by: <span class="name"><a href="/studio">{{ entry.author }}</a></span> <span class="date">{{ entry.postDate.format('M jS, Y') }}</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="greylt blogpost">
+    <div class="sidebar hidden-xs">
+      <div class="back sidein col-xs-12">
+        <a href="/"><i class="fa fa-angle-left"></i>blog list</a>
+      </div>
+      <div class="share sidein col-xs-12">
+        <!-- <span style="display:inline-block;padding-bottom:10px;">Share</span>
+        <div class="clearfix"></div>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-slack"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a> -->
+      </div>
+      <div class="bloglist sidein col-xs-12" style="padding-bottom:0px;">
+        <span>Recent Articles</span>
+        <div class="row">
+        {% for entry in craft.entries.section('blog').limit(2).find() %}
+          <a href="/blog/{{ entry.slug }}" class="col-xs-12 post text-center">
+
+            {% set image = entry.thumbnail.first() %}
+            {% if image %}
+              <img src="{{ image.url }}" alt="" />
+            {% else %}
+
+            <!-- Fallback to hero image if no thumbnail -->
+            {% set image = entry.heroImage.first() %}
+            {% if image %}
+              <img src="{{ image.url }}" alt="" />
+            {% endif%}
+
+            {% endif %}
+            <h6 style="padding-top:10px;">{{ entry.title }}</h6>
+          </a>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="meet sidein col-xs-12">
+        <span>Author</span>
+        <div class="clearfix"></div>
+        {% if entry.author.photoUrl %}
+          <div class="authimage" style="background:url({{ entry.author.photoUrl }}) no-repeat center;background-size:cover;"></div>
+        {% else %}
+          <div class="authimage" style="background:url('/assets/img/theoryThreeShareBox.png') no-repeat center;background-size:cover;"></div>
+        {% endif %}
+        <div class="clearfix visible-xs-block"></div>
+        <h4>{{ entry.author }}</h4>
+      </div>
+    </div>
+
+    <div class="content center">
+      <div class="back col-xs-12 visible-xs-block">
+        <a href="/blog"><i class="fa fa-angle-left"></i>blog list</a>
+      </div>
+      <div class="clearfix"></div>
+      <div class="copy">
+
+        {% set image = entry.heroImage.first() %}
+        {% if image %}
+
+        {% else %}
+          <!-- title shows up here if no image -->
+          <h1>{{ entry.title }}</h1>
+          <div class="ert">
+            <h5>{{ entry.ert }} min read</h5>
+          </div>
+        {%endif %}
+        <!-- Blog Matrix section -->
+
+        {% for block in entry.blogLayout %}
+
+        {% if block.type == "mainTitle" %}
+          <span class="maintitle">
+            {{ block.mainTitle }}
+          </span>
+
+        {% elseif block.type == "secondaryTitle" %}
+          <span class="secondtitle">
+            {{ block.secondaryTitle }}
+          </span>
+
+        {% elseif block.type == "textBlock" %}
+          {{ block.textBlock }}
+
+        {% elseif block.type == "photoBlock" %}
+
+          {% set image = block.image.first() %}
+          {% if image %}
+            <div class="image">
+              <span class="secondtitle text-left" style="padding:15px 0;">
+                {{ block.secondTitle }}
+                {% if block.imageLink | length %}
+                  - <a href="{{ block.imageLink }}" style="font-weight:300;">go to {{ block.secondTitle }}</a>
+                {% endif %}
+              </span>
+              {% if block.imageLink | length %}
+                <a href="{{ block.imageLink }}"><img src="{{ image.getUrl() }}" width="{{ image.getWidth() }}" height="{{ image.getHeight() }}" alt="{{ image.title }}"></a>
+                {% else %}
+                  <img src="{{ image.getUrl() }}" width="{{ image.getWidth() }}" height="{{ image.getHeight() }}" alt="{{ image.title }}">
+              {% endif %}
+              <span class="caption">{{ block.caption }}</span>
+            </div>
+          {% endif %}
+
+          {% elseif block.type == "videoBlock" %}
+          {{ block.videoBlock }}
+
+          {% elseif block.type == "quoteBlock" %}
+            <div class="pullquote">
+              <span class="quote">{{ block.quote }}</span>
+              <span class="quoteauth">- {{ block.cite }}</span>
+            </div>
+
+          {% elseif block.type == "codeBlock" %}
+            {% include 'partials/blog-codeblock' %}
+
+          {% endif %}
+
+        {% endfor %}
+      </div>
+      <div class="visible-xs-inline-block">
+        <div class="act row">
+          <div class="back col-xs-12 col-sm-6 text-left">
+            <a href="/blog"><i class="fa fa-angle-left"></i>blog list</a>
+          </div>
+          <div class="share col-xs-12 col-sm-6 text-left" style="padding-top:10px;display:none;">
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-slack"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+          </div>
+        </div>
+        <div class="bloglist" style="padding-bottom:0px;">
+          <h4>Related Articles</h4>
+          <div class="row">
+            {% for entry in craft.entries.section('blog').find() %}
+              <a href="/blog/{{ entry.slug }}" class="col-xs-12 col-sm-6 post text-center">
+                {% set image = entry.heroImage.first() %}
+                {% if image %}
+                  <img src="{{ image.url }}" alt="" />
+                {% endif %}
+                <h6 style="padding-top:10px;">{{ entry.title }}</h6>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="meet">
+          <h4>Author</h4>
+          <div class="clearfix"></div>
+
+          {% if entry.author.photoUrl %}
+            <div class="authimage" style="background:url({{ entry.author.photoUrl }}) no-repeat center;background-size:cover;"></div>
+          {% else %}
+            <div class="authimage" style="background:url('/assets/img/theoryThreeShareBox.png') no-repeat center;background-size:cover;"></div>
+          {% endif %}
+
+          <div class="clearfix visible-xs-block"></div>
+          <h4>{{ entry.author }}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="grey" style="border: 10px solid #f6f8fa;padding:10px;">
+    <div class="subscribe">
+      <h4 class="col-xs-12 col-sm-6 hidden-xs" style="text-align:right;">Subscribe to our newsletter</h4>
+      <h4 class="col-xs-12 col-sm-6 visible-xs-inline-block" style="text-align:center;">Subscribe to our newsletter</h4>
+      <div class="input col-xs-12 col-sm-6">
+        <form action="http://theorythreeinteractive.createsend.com/t/r/s/hthlulr/" method="post" id="subForm">
+          <input id="fieldEmail" name="cm-hthlulr-hthlulr" type="email" placeholder="email@email.com" required />
+          <button id="subscribeButton" type="submit" class="bttn med" style="padding: 8.5px 15px;">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  {% block pagescripts %}
+  {% endblock %}
+
+{% endblock %}
