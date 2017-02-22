@@ -20,7 +20,7 @@
 		<link rel="shortcut icon" href="favicon.ico">
 
 		<!-- googlefonts (playfair, roboto) -->
-		<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Roboto:500,700,900" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Roboto:400,900" rel="stylesheet">
 
 		<!-- icon font (sorry guys) -->
 		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
@@ -43,9 +43,25 @@
 	</head>
 
 	<body>
-		<div class="contain">
+		<div class="holder">
 			<nav>
-
+				<a href="/" class="nav-image">
+					<img src="/assets/img/logo.svg" alt="logo">
+				</a>
+				<ul class="nav-list">
+					<li class="nav-item">
+						<a href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a href="http://www.ryanhallmedia.com">About</a>
+					</li>
+					<li class="nav-item">
+						<a href="https://www.designbycosmic.com/">Another</a>
+					</li>
+					<li class="nav-item">
+						<a href="/admin" class="button">Create Post</a>
+					</li>
+				</ul>
 			</nav>
 
 			{% block content %}

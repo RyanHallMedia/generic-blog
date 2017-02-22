@@ -113,8 +113,8 @@ $(document).ready(function(){
 		$('.info a').removeClass("preanimate");
 	}, 2000);
 	setTimeout(function(){
-    $('nav ul').addClass('animated fadeInDown');
-		$('nav ul').removeClass("preanimate");
+    $('.nav ul').addClass('animated fadeInDown');
+		$('.nav ul').removeClass("preanimate");
 	}, 2400);
 	setTimeout(function(){
 		$('.email span').addClass('animated fadeInRight');

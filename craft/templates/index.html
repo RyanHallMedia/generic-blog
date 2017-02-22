@@ -4,67 +4,79 @@
 {% block content %}
 <!-- header -->
   <header class="header-main">
-    {% set image = entry.heroImage.first() %}
+    <!-- {% set image = entry.heroImage.first() %}
     {% if image %}
       <div class="header-background" style="background-image:url('{{ image.url }}');background-position:center;background-size:cover;">
       </div>
-    {% endif %}
+    {% endif %} -->
     <div class="header-text">
       <h1>{{ entry.blogIndexTitle }}</h1>
-			<h5>{{ entry.blogIndexSubtitle }}</h5>
+			<div class="clearfix"></div>
+			<h4>{{ entry.blogIndexSubtitle }}</h4>
     </div>
+		<div class="down">
+			<span>Scroll</span>
+			<div class="line"></div>
+		</div>
   </header>
 
-  <!-- CONTENT SECTION -->
-  <div class="grey">
-    <div class="subscribe row">
-      <h4 class="col-xs-12 col-sm-6 hidden-xs">Subscribe to our newsletter</h4>
-      <h4 class="col-xs-12 col-sm-6 visible-xs-inline-block">Subscribe to our newsletter</h4>
-      <div class="input col-xs-12 col-sm-6">
-        <form action="" method="post" id="subForm">
-          <input id="fieldEmail" name="cm-hthlulr-hthlulr" type="email" placeholder="email@email.com" required />
-          <button id="subscribeButton" type="submit" class="bttn med">Subscribe</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <!-- the list -->
-  <div class="greylt bloglist center">
-    <h3>Recent posts</h3>
-    <div class="row">
-      {% for entry in craft.entries.section('blog').find() %}
-        <a href="/blog/{{ entry.slug }}" class="col-xs-12 col-sm-6 col-md-4 post">
-          {% set image = entry.thumbnail.first() %}
-          {% if image %}
-            <div class="img" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
-            {% else %}
-              <!-- Fallback to hero image if no thumbnail -->
-              {% set image = entry.heroImage.first() %}
-              {% if image %}
-                <div class="img" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
-              {% endif%}
+  <section class="blog-list contain">
+      {% for entry in craft.entries.section('blog').limit(5).find() %}
 
-            {% endif %}
-            <div class="information">
-              <h5>{{ entry.postTitle }}</h5>
-              <div class="clearfix"></div>
-              <p>
-                {{ entry.blogSummary }}
-              </p>
-          </div>
-        </a>
+				{% if (loop.index - 1) is divisible by(2) %}
+	        <a href="/blog/{{ entry.slug }}" class="list-item row">
+	          {% set image = entry.thumbnail.first() %}
+	          {% if image %}
+	            <div class="list-item-img col-xs-12 col-sm-6" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+	            {% else %}
+	              <!-- Fallback to hero image if no thumbnail -->
+	              {% set image = entry.heroImage.first() %}
+	              {% if image %}
+	                <div class="list-item-img col-xs-12 col-sm-6" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+	              {% endif%}
+
+	            {% endif %}
+	            <div class="information col-xs-12 col-sm-6">
+	              <h3>{{ entry.postTitle }}</h3>
+	              <div class="clearfix"></div>
+								<h6>{{ entry.ert }} min read</h6>
+	              <p class="summary">
+	                {{ entry.blogSummary }}
+	              </p>
+								<span class="button">Read More</span>
+	          	</div>
+	        </a>
+			    <div class="clearfix"></div>
+					{% else %}
+
+					<a href="/blog/{{ entry.slug }}" class="list-item row">
+						<div class="information col-xs-12 col-sm-6">
+							<h3>{{ entry.postTitle }}</h3>
+							<div class="clearfix"></div>
+							<h6>{{ entry.ert }} min read</h6>
+							<p class="summary">
+								{{ entry.blogSummary }}
+							</p>
+							<span class="button">Read More</span>
+						</div>
+						{% set image = entry.thumbnail.first() %}
+						{% if image %}
+							<div class="list-item-img col-xs-12 col-sm-6" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+							{% else %}
+								<!-- Fallback to hero image if no thumbnail -->
+								{% set image = entry.heroImage.first() %}
+								{% if image %}
+									<div class="list-item-img col-xs-12 col-sm-6" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+								{% endif%}
+
+							{% endif %}
+					</a>
+					<div class="clearfix"></div>
+					{% endif %}
+
       {% endfor %}
-    </div>
-    <div class="clearfix"></div>
-  </div>
-
-	<h2>Recent News</h2>
-	<ul>
-		{% for entry in craft.entries.section('news').limit(5).find() %}
-			<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-		{% endfor %}
-	</ul>
+  </section>
 
   {% block pagescripts %}
     <script type="text/javascript">

@@ -69,6 +69,16 @@
 		"oF": 0,
 		"oS": 3
 		},
+	"\/css\/styles.min.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "\/css\/styles.min.min.css",
+		"oF": 0,
+		"oS": 0
+		},
 	"\/fonts\/fontawesome-webfont.eot": {
 		"ft": 8192,
 		"oA": 2,
@@ -109,6 +119,22 @@
 		"oAP": "\/fonts\/FontAwesome.otf",
 		"oF": 0
 		},
+	"\/img\/blog\/blog-back.jpg": {
+		"ft": 16384,
+		"iS": 1773576,
+		"oA": 0,
+		"oAP": "\/img\/blog\/blog-back.jpg",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/img\/blog\/Logos-04.png": {
+		"ft": 32768,
+		"iS": 45174,
+		"oA": 0,
+		"oAP": "\/img\/blog\/Logos-04.png",
+		"oF": 0,
+		"opt": 0
+		},
 	"\/img\/blog\/me.jpg": {
 		"ft": 16384,
 		"iS": 438893,
@@ -124,6 +150,16 @@
 		"oAP": "\/img\/blog\/ryan.png",
 		"oF": 0,
 		"opt": 0
+		},
+	"\/img\/logo.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "\/img\/logo.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
 		},
 	"\/js\/bootstrap.js": {
 		"ft": 64,
