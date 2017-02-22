@@ -1,0 +1,13 @@
+{# this template is used by the blog detail page #}
+
+{% set q = craft.request.getParam('q') %}
+
+{% for tag in craft.tags.slug(q) %}
+  {% set blogEntries = craft.entries.section('blog').relatedTo(tag).sort('postDate') %}
+    <span class="title">{{ tag.title }}</span>
+    <ul class="tagList">
+    {% for entry in blogEntries %}
+      <li><span class="subtitle">{{ entry.postDate.format('F d, Y') }}</span><br><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endfor %}

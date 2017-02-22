@@ -9,45 +9,39 @@
 
   {% set image = entry.heroImage.first() %}
   {% if image %}
-    <div id="contentHero" class="slideshow parallax">
-      <div class="scaleMask" style="width:100%; height:650px; overflow:hidden; margin:0; padding:0; background-color:#fff;">
-        <div class="parallax-background {% if entry.removeBlur %} noBlur {% endif %}" style="height:750px; width:100%; margin:0 auto; background-image:url({{ image.url }});background-position:center;background-size:cover;" data-photo-source="{{ image.url }}"></div>
-
-        <div class="heroOverlay on"></div>
-
-        <div class="heroText center" style="opacity:1;">
-
-        <h5><a href="#">{{ entry.blogCategory }}</a></h5>
-        <h1>{{ entry.title }}</h1>
-
-        <div class="ert">
-          <h5 class="light">{{ entry.ert }} min read</h5>
+    <header class="header-interior">
+        <div class="header-background" style="background-image:url({{ image.url }});background-position:center;background-size:cover;">
         </div>
+
+        <div class="header-text">
+          <h1>{{ entry.title }}</h1>
+
+          <div class="ert">
+            <h5>{{ entry.ert }} min read</h5>
+          </div>
           <div class="author">
             {% if entry.author.photoUrl %}
-              <div class="img" style="background:url({{ entry.author.photoUrl }})no-repeat center;background-size:cover;"></div>
+              <div class="author-img" style="background:url({{ entry.author.photoUrl }})no-repeat center;background-size:cover;"></div>
             {% endif %}
-
-            <span class="date-name">by: <span class="name"><a href="/studio">{{ entry.author }}</a></span> <span class="date">{{ entry.postDate.format('M jS, Y') }}</span></span>
+            <span class="date-name">by: <span class="name">{{ entry.author }}</span> <span class="date">{{ entry.postDate.format('M jS, Y') }}</span></span>
           </div>
         </div>
-      </div>
-    </div>
+    </header>
   {% endif %}
 
-  <div class="greylt blogpost">
+  <div class="blog-post">
     <div class="sidebar hidden-xs">
-      <div class="back sidein col-xs-12">
+      <div class="back side-in col-xs-12">
         <a href="/"><i class="fa fa-angle-left"></i>blog list</a>
       </div>
       <div class="share sidein col-xs-12">
-        <!-- <span style="display:inline-block;padding-bottom:10px;">Share</span>
+        <span>Share</span>
         <div class="clearfix"></div>
         <a href="#"><i class="fa fa-twitter"></i></a>
         <a href="#"><i class="fa fa-slack"></i></a>
-        <a href="#"><i class="fa fa-facebook"></i></a> -->
+        <a href="#"><i class="fa fa-facebook"></i></a>
       </div>
-      <div class="bloglist sidein col-xs-12" style="padding-bottom:0px;">
+      <div class="blog-list sidein col-xs-12">
         <span>Recent Articles</span>
         <div class="row">
         {% for entry in craft.entries.section('blog').limit(2).find() %}
@@ -65,7 +59,7 @@
             {% endif%}
 
             {% endif %}
-            <h6 style="padding-top:10px;">{{ entry.title }}</h6>
+            <h6>{{ entry.title }}</h6>
           </a>
         {% endfor %}
         </div>
@@ -122,10 +116,10 @@
           {% set image = block.image.first() %}
           {% if image %}
             <div class="image">
-              <span class="secondtitle text-left" style="padding:15px 0;">
+              <span class="secondtitle text-left">
                 {{ block.secondTitle }}
                 {% if block.imageLink | length %}
-                  - <a href="{{ block.imageLink }}" style="font-weight:300;">go to {{ block.secondTitle }}</a>
+                  - <a href="{{ block.imageLink }}">go to {{ block.secondTitle }}</a>
                 {% endif %}
               </span>
               {% if block.imageLink | length %}
@@ -158,13 +152,13 @@
           <div class="back col-xs-12 col-sm-6 text-left">
             <a href="/blog"><i class="fa fa-angle-left"></i>blog list</a>
           </div>
-          <div class="share col-xs-12 col-sm-6 text-left" style="padding-top:10px;display:none;">
+          <div class="share col-xs-12 col-sm-6 text-left">
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-slack"></i></a>
             <a href="#"><i class="fa fa-facebook"></i></a>
           </div>
         </div>
-        <div class="bloglist" style="padding-bottom:0px;">
+        <div class="bloglist">
           <h4>Related Articles</h4>
           <div class="row">
             {% for entry in craft.entries.section('blog').find() %}
@@ -173,7 +167,7 @@
                 {% if image %}
                   <img src="{{ image.url }}" alt="" />
                 {% endif %}
-                <h6 style="padding-top:10px;">{{ entry.title }}</h6>
+                <h6>{{ entry.title }}</h6>
               </a>
             {% endfor %}
           </div>
@@ -199,21 +193,35 @@
   <div class="clearfix"></div>
 
   <!-- CONTENT SECTION -->
-  <div class="grey" style="border: 10px solid #f6f8fa;padding:10px;">
+  <div class="grey">
     <div class="subscribe">
-      <h4 class="col-xs-12 col-sm-6 hidden-xs" style="text-align:right;">Subscribe to our newsletter</h4>
-      <h4 class="col-xs-12 col-sm-6 visible-xs-inline-block" style="text-align:center;">Subscribe to our newsletter</h4>
+      <h4 class="col-xs-12 col-sm-6 hidden-xs">Subscribe to our newsletter</h4>
+      <h4 class="col-xs-12 col-sm-6 visible-xs-inline-block">Subscribe to our newsletter</h4>
       <div class="input col-xs-12 col-sm-6">
         <form action="http://theorythreeinteractive.createsend.com/t/r/s/hthlulr/" method="post" id="subForm">
           <input id="fieldEmail" name="cm-hthlulr-hthlulr" type="email" placeholder="email@email.com" required />
-          <button id="subscribeButton" type="submit" class="bttn med" style="padding: 8.5px 15px;">Subscribe</button>
+          <button id="subscribeButton" type="submit" class="bttn med">Subscribe</button>
         </form>
       </div>
     </div>
     <div class="clearfix"></div>
   </div>
 
-  {% block pagescripts %}
-  {% endblock %}
+  {% for tag in craft.tags.slug(q).limit(2) %}
+    {% set blogEntries = craft.entries.section('blog').relatedTo(tag).sort('postDate') %}
+      <span class="title">{{ tag.title }}</span>
+      <ul class="tagList">
+      {% for entry in blogEntries %}
+        <li><span class="subtitle">{{ entry.postDate.format('F d, Y') }}</span><br><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
 
+  {% for tag in craft.tags.group('blogTags') %}
+    <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
+  {% endfor %}
+
+{% endblock %}
+
+{% block pagescripts %}
 {% endblock %}

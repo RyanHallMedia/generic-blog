@@ -2,35 +2,28 @@
 {% set title = "Blog" %}
 
 {% block content %}
-	<h1>{{ entry.title }}</h1>
-
-	{{ entry.body }}
-
 <!-- header -->
-  <div id="contentHero" class="slideshow parallax">
-    <div class="scaleMask" style="height:500px;">
-      {% set image = entry.heroImage.first() %}
-      {% if image %}
-        <div class="parallax-background" style="height:600px; width:100%; margin:0 auto; background-image:url('{{ image.url }}');background-position:center;background-size:cover;" data-photo-source="{{ image.url }}">
-        </div>
-      {% endif %}
-      <div class="heroOverlay on"></div>
-      <div class="heroText center">
-        <h5>{{ entry.blogIndexSubtitle }}</h5>
-        <h1>{{ entry.blogIndexTitle }}</h1>
+  <header class="header-main">
+    {% set image = entry.heroImage.first() %}
+    {% if image %}
+      <div class="header-background" style="background-image:url('{{ image.url }}');background-position:center;background-size:cover;">
       </div>
+    {% endif %}
+    <div class="header-text">
+      <h1>{{ entry.blogIndexTitle }}</h1>
+			<h5>{{ entry.blogIndexSubtitle }}</h5>
     </div>
-  </div>
+  </header>
 
   <!-- CONTENT SECTION -->
-  <div class="grey" style="border: 10px solid #f6f8fa;padding:10px;">
+  <div class="grey">
     <div class="subscribe row">
-      <h4 class="col-xs-12 col-sm-6 hidden-xs" style="text-align:right;">Subscribe to our newsletter</h4>
-      <h4 class="col-xs-12 col-sm-6 visible-xs-inline-block" style="text-align:center;">Subscribe to our newsletter</h4>
+      <h4 class="col-xs-12 col-sm-6 hidden-xs">Subscribe to our newsletter</h4>
+      <h4 class="col-xs-12 col-sm-6 visible-xs-inline-block">Subscribe to our newsletter</h4>
       <div class="input col-xs-12 col-sm-6">
         <form action="" method="post" id="subForm">
           <input id="fieldEmail" name="cm-hthlulr-hthlulr" type="email" placeholder="email@email.com" required />
-          <button id="subscribeButton" type="submit" class="bttn med" style="padding: 8.5px 15px;">Subscribe</button>
+          <button id="subscribeButton" type="submit" class="bttn med">Subscribe</button>
         </form>
       </div>
     </div>
