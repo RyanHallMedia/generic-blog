@@ -148,11 +148,27 @@ header {
     bottom: 0;
     transform: translateX(-50%);
 
+    .scroll {
+      position: relative;
+
+    }
     .line {
       height: 50px;
       width: 3px;
       margin: 0 auto;
       background: $lightgrey;
+      position: relative;
+      overflow: hidden;
+
+      .cover {
+        height: 100%;
+        width: 100%;
+        display: block;
+        background: $white;
+        position: absolute;
+        top: 100%;
+        left: 0;
+      }
     }
   }
 }
@@ -260,24 +276,80 @@ header.split {
 // blog post bottom
 .blog-post-bottom {
   max-width: 1200px;
+  padding: 15px;
   margin: 0 auto 65px auto;
 
   .article {
+    margin: 15px 0;
     text-align: center;
+    position: relative;
 
-    .title {
-      width: 100%;
-      display: inline-block;
-    }
     .article-img {
-      height: 150px;
+      height: 250px;
       width: 100%;
-      max-width: 250px;
       display: inline-block;
+      position: relative;
+      transition: ease all 0.2s;
+
+      &:after {
+        content: "";
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.65) 100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: ease all 0.2s;
+      }
     }
-    span {
-      width: 100%;
+    .title {
+      width: calc(100% - 30px);
+      padding: 0 15px;
       display: inline-block;
+      color: $white;
+      letter-spacing: 0.01em;
+      text-align: left;
+      position: absolute;
+      top: 0;
+      left: 15px;
+    }
+    .subtitle {
+      padding-left: 15px;
+      color: $lightgrey;
+      position: absolute;
+      left: 15px;
+      bottom: 10px;
+    }
+    .button-related {
+      padding-right: 35px;
+      color: $green;
+      position: absolute;
+      right: 15px;
+      bottom: 10px;
+
+      i {
+        font-size: 1.4em;
+        position: relative;
+        top: 2px;
+        left: 5px;
+        transition: ease all 0.2s;
+      }
+    }
+    &:hover {
+
+      .article-img {
+
+        &:after {
+          background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.10) 50%,rgba(0,0,0,0.85) 100%);
+          transition: ease all 0.2s;
+        }
+      }
+      .button-related {
+
+        i {
+          left: 15px;
+        }
+      }
     }
   }
 }

@@ -153,7 +153,7 @@
 		},
 	"\/img\/blog\/Static-Assets-with-Amazon-s3-1.jpg": {
 		"ft": 16384,
-		"iS": 370461,
+		"iS": 370448,
 		"oA": 0,
 		"oAP": "\/img\/blog\/Static-Assets-with-Amazon-s3-1.jpg",
 		"oF": 0,
@@ -204,6 +204,24 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"\/js\/jquery.scrollme.js": {
+		"ft": 64,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/jquery.scrollme.min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"\/js\/jquery.scrollme.min.js": {
+		"ft": 64,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/jquery.scrollme.min.min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"\/js\/script.js": {
 		"ft": 64,
 		"mi": 1,
@@ -221,19 +239,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"\/scss\/_form.scss": {
-		"aP": 1,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/css\/_form.min.css",
-		"oF": 0,
-		"oS": 3,
-		"uL": 1
 		},
 	"\/scss\/_main.scss": {
 		"aP": 1,

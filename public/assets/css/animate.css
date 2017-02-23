@@ -3382,3 +3382,41 @@
   animation-duration: 2s;
   animation-delay: 2s;
 }
+
+/* custom stuff */
+
+
+@-webkit-keyframes fadeInUpCustom {
+  from {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -200%, 0);
+    transform: translate3d(0, -200%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUpCustom {
+  from {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -200%, 0);
+    transform: translate3d(0, -200%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInUpCustom {
+  -webkit-animation-name: fadeInUpCustom;
+  animation-name: fadeInUpCustom;
+  animation-duration: 2s;
+  animation-delay: 3s;
+}

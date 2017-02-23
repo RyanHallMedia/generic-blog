@@ -9,17 +9,16 @@
 
   {% set image = entry.heroImage.first() %}
   {% if image %}
-    <header class="header-interior split">
-      <div class="header-background" style="background-image:url({{ image.url }});background-position:center;background-size:cover;">
+    <header class="header-interior split preanimate">
+      <div class="header-background preanimate" style="background-image:url({{ image.url }});background-position:center;background-size:cover;">
       </div>
-
       <div class="header-text">
-        <h1>{{ entry.title }}</h1>
+        <h1 class="preanimate">{{ entry.title }}</h1>
         <div class="clearfix"></div>
         <div class="ert">
-          <h6>{{ entry.ert }} min read</h6>
+          <h6 class="preanimate">{{ entry.ert }} min read</h6>
         </div>
-        <div class="author">
+        <div class="author preanimate">
           {% if entry.author.photoUrl %}
             <div class="author-img" style="background:url({{ entry.author.photoUrl }})no-repeat center;background-size:cover;"></div>
           {% endif %}
@@ -30,14 +29,14 @@
 
     {% else %}
 
-    <header class="header-interior">
+    <header class="header-interior preanimate">
       <div class="header-text">
-        <h1>{{ entry.title }}</h1>
+        <h1 class="preanimate">{{ entry.title }}</h1>
         <div class="clearfix"></div>
         <div class="ert">
-          <h6>{{ entry.ert }} min read</h6>
+          <h6 class="preanimate">{{ entry.ert }} min read</h6>
         </div>
-        <div class="author">
+        <div class="author preanimate">
           {% if entry.author.photoUrl %}
             <div class="author-img" style="background:url({{ entry.author.photoUrl }})no-repeat center;background-size:cover;"></div>
           {% endif %}
@@ -59,7 +58,7 @@
       <div class="clearfix"></div>
 
       <!-- all text and images -->
-      <div class="copy">
+      <div class="copy preanimate">
         <!-- Blog Matrix section -->
         {% for block in entry.blogLayout %}
 
@@ -106,13 +105,13 @@
 
   <!-- related articles -->
   <div class="blog-post-bottom row">
-
+    <h3>Related Articles</h3>
+    <div class="clearfix"></div>
     {% for tag in craft.tags.slug(q).limit(2) %}
       {% set blogEntries = craft.entries.section('blog').relatedTo(tag).sort('postDate').limit(1) %}
-      <div class="article col-xs-12 col-sm-6">
 
-        {% for entry in blogEntries %}
-          <span class="title">{{ entry.title }}</span>
+      {% for entry in blogEntries %}
+        <a href="{{ entry.url }}" class="article col-xs-12 col-sm-6">
           {% set image = entry.thumbnail.first() %}
             {% if image %}
               <div class="article-img" style="background-image:url({{ image.url }});background-position:center;background-size:cover;"></div>
@@ -124,10 +123,10 @@
             {% endif%}
           {% endif %}
 
-          <span class="subtitle">{{ entry.postDate.format('F d, Y') }}</span>
-          <div class="clearfix"></div>
-          <a href="{{ entry.url }}" class="button">Read More</a>
-        </div>
+          <h5 class="title">{{ entry.title }}</h5>
+          <h4 class="subtitle">{{ entry.postDate.format('F d, Y') }}</h4>
+          <span class="button-related">Read More <i class="fa fa-angle-right"></i></span>
+        </a>
         {% endfor %}
 
 

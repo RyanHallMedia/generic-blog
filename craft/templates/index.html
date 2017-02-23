@@ -3,20 +3,20 @@
 
 {% block content %}
 <!-- header -->
-  <header class="header-main">
+  <header class="header-main preanimate">
     <!-- {% set image = entry.heroImage.first() %}
     {% if image %}
       <div class="header-background" style="background-image:url('{{ image.url }}');background-position:center;background-size:cover;">
       </div>
     {% endif %} -->
     <div class="header-text">
-      <h1>{{ entry.blogIndexTitle }}</h1>
+      <h1 class="preanimate">{{ entry.blogIndexTitle }}</h1>
 			<div class="clearfix"></div>
-			<h4>{{ entry.blogIndexSubtitle }}</h4>
+			<h4 class="preanimate">{{ entry.blogIndexSubtitle }}</h4>
     </div>
 		<div class="down">
-			<span>Scroll</span>
-			<div class="line"></div>
+			<span class="scroll preanimate">Scroll</span>
+			<div class="line preanimate"><span class="cover animated fadeInUpCustom infinite"></span></div>
 		</div>
   </header>
 
@@ -28,49 +28,49 @@
       {% for entry in pageEntries %}
 
 				{% if (loop.index - 1) is divisible by(2) %}
-	        <a href="/blog/{{ entry.slug }}" class="list-item row">
+	        <a href="/blog/{{ entry.slug }}" class="list-item row scrollme">
 	          {% set image = entry.thumbnail.first() %}
 	          {% if image %}
-	            <div class="list-item-img col-xs-12 col-sm-6" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+	            <div class="list-item-img col-xs-12 col-sm-6 animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="-200" data-scale="0.8" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
 	            {% else %}
 	              <!-- Fallback to hero image if no thumbnail -->
 	              {% set image = entry.heroImage.first() %}
 	              {% if image %}
-	                <div class="list-item-img col-xs-12 col-sm-6" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+	                <div class="list-item-img col-xs-12 col-sm-6 animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="-200" data-scale="0.8" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
 	              {% endif%}
 
 	            {% endif %}
 	            <div class="information col-xs-12 col-sm-6">
-	              <h3>{{ entry.postTitle }}</h3>
+	              <h3 class="animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="150">{{ entry.postTitle }}</h3>
 	              <div class="clearfix"></div>
-								<h6>{{ entry.ert }} min read</h6>
-	              <p class="summary">
+								<h6 class="animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="200">{{ entry.ert }} min read</h6>
+	              <p class="summary animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="250">
 	                {{ entry.blogSummary }}
 	              </p>
-								<span class="button">Read More</span>
+								<span class="button animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatey="350">Read More</span>
 	          	</div>
 	        </a>
 			    <div class="clearfix"></div>
 					{% else %}
 
-					<a href="/blog/{{ entry.slug }}" class="list-item row">
+					<a href="/blog/{{ entry.slug }}" class="list-item row scrollme">
 						<div class="information col-xs-12 col-sm-6">
-							<h3>{{ entry.postTitle }}</h3>
+							<h3 class="animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="-150">{{ entry.postTitle }}</h3>
 							<div class="clearfix"></div>
-							<h6>{{ entry.ert }} min read</h6>
-							<p class="summary">
+							<h6 class="animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="-200">{{ entry.ert }} min read</h6>
+							<p class="summary animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="-250">
 								{{ entry.blogSummary }}
 							</p>
-							<span class="button">Read More</span>
+							<span class="button animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatey="350">Read More</span>
 						</div>
 						{% set image = entry.thumbnail.first() %}
 						{% if image %}
-							<div class="list-item-img col-xs-12 col-sm-6" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+							<div class="list-item-img col-xs-12 col-sm-6 animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="200" data-scale="0.8" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
 							{% else %}
 								<!-- Fallback to hero image if no thumbnail -->
 								{% set image = entry.heroImage.first() %}
 								{% if image %}
-									<div class="list-item-img col-xs-12 col-sm-6" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+									<div class="list-item-img col-xs-12 col-sm-6 animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="200" data-scale="0.8" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
 								{% endif%}
 
 							{% endif %}
@@ -100,6 +100,8 @@
 
 
   {% block pagescripts %}
+  <!-- main js -->
+  <script src="/assets/js/jquery.scrollme.min.js" type="text/javascript"></script>
   {% endblock %}
 
 {% endblock %}
