@@ -9,217 +9,131 @@
 
   {% set image = entry.heroImage.first() %}
   {% if image %}
-    <header class="header-interior">
-        <div class="header-background" style="background-image:url({{ image.url }});background-position:center;background-size:cover;">
-        </div>
+    <header class="header-interior split">
+      <div class="header-background" style="background-image:url({{ image.url }});background-position:center;background-size:cover;">
+      </div>
 
-        <div class="header-text">
-          <h1>{{ entry.title }}</h1>
-
-          <div class="ert">
-            <h5>{{ entry.ert }} min read</h5>
-          </div>
-          <div class="author">
-            {% if entry.author.photoUrl %}
-              <div class="author-img" style="background:url({{ entry.author.photoUrl }})no-repeat center;background-size:cover;"></div>
-            {% endif %}
-            <span class="date-name">by: <span class="name">{{ entry.author }}</span> <span class="date">{{ entry.postDate.format('M jS, Y') }}</span></span>
-          </div>
+      <div class="header-text">
+        <h1>{{ entry.title }}</h1>
+        <div class="clearfix"></div>
+        <div class="ert">
+          <h6>{{ entry.ert }} min read</h6>
         </div>
+        <div class="author">
+          {% if entry.author.photoUrl %}
+            <div class="author-img" style="background:url({{ entry.author.photoUrl }})no-repeat center;background-size:cover;"></div>
+          {% endif %}
+          <span class="date-name">by: <span class="name">{{ entry.author }}</span> <span class="date">{{ entry.postDate.format('M jS, Y') }}</span></span>
+        </div>
+      </div>
     </header>
+
+    {% else %}
+
+    <header class="header-interior">
+      <div class="header-text">
+        <h1>{{ entry.title }}</h1>
+        <div class="clearfix"></div>
+        <div class="ert">
+          <h6>{{ entry.ert }} min read</h6>
+        </div>
+        <div class="author">
+          {% if entry.author.photoUrl %}
+            <div class="author-img" style="background:url({{ entry.author.photoUrl }})no-repeat center;background-size:cover;"></div>
+          {% endif %}
+          <span class="date-name">by: <span class="name">{{ entry.author }}</span> <span class="date">{{ entry.postDate.format('M jS, Y') }}</span></span>
+        </div>
+      </div>
+    </header>
+
   {% endif %}
 
   <div class="blog-post">
-    <div class="sidebar hidden-xs">
-      <div class="back side-in col-xs-12">
-        <a href="/"><i class="fa fa-angle-left"></i>blog list</a>
-      </div>
-      <div class="share sidein col-xs-12">
-        <span>Share</span>
-        <div class="clearfix"></div>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-slack"></i></a>
-        <a href="#"><i class="fa fa-facebook"></i></a>
-      </div>
-      <div class="blog-list sidein col-xs-12">
-        <span>Recent Articles</span>
-        <div class="row">
-        {% for entry in craft.entries.section('blog').limit(2).find() %}
-          <a href="/blog/{{ entry.slug }}" class="col-xs-12 post text-center">
 
-            {% set image = entry.thumbnail.first() %}
-            {% if image %}
-              <img src="{{ image.url }}" alt="" />
-            {% else %}
-
-            <!-- Fallback to hero image if no thumbnail -->
-            {% set image = entry.heroImage.first() %}
-            {% if image %}
-              <img src="{{ image.url }}" alt="" />
-            {% endif%}
-
-            {% endif %}
-            <h6>{{ entry.title }}</h6>
-          </a>
-        {% endfor %}
-        </div>
-      </div>
-      <div class="meet sidein col-xs-12">
-        <span>Author</span>
-        <div class="clearfix"></div>
-        {% if entry.author.photoUrl %}
-          <div class="authimage" style="background:url({{ entry.author.photoUrl }}) no-repeat center;background-size:cover;"></div>
-        {% else %}
-          <div class="authimage" style="background:url('/assets/img/theoryThreeShareBox.png') no-repeat center;background-size:cover;"></div>
-        {% endif %}
-        <div class="clearfix visible-xs-block"></div>
-        <h4>{{ entry.author }}</h4>
-      </div>
-    </div>
-
-    <div class="content center">
+    <!-- post body -->
+    <div class="content">
+      <!-- another back button -->
       <div class="back col-xs-12 visible-xs-block">
         <a href="/blog"><i class="fa fa-angle-left"></i>blog list</a>
       </div>
       <div class="clearfix"></div>
+
+      <!-- all text and images -->
       <div class="copy">
-
-        {% set image = entry.heroImage.first() %}
-        {% if image %}
-
-        {% else %}
-          <!-- title shows up here if no image -->
-          <h1>{{ entry.title }}</h1>
-          <div class="ert">
-            <h5>{{ entry.ert }} min read</h5>
-          </div>
-        {%endif %}
         <!-- Blog Matrix section -->
-
         {% for block in entry.blogLayout %}
 
+        <!-- main title block -->
         {% if block.type == "mainTitle" %}
-          <span class="maintitle">
+          <h3 class="maintitle">
             {{ block.mainTitle }}
-          </span>
+          </h3>
 
+        <!-- second title block -->
         {% elseif block.type == "secondaryTitle" %}
-          <span class="secondtitle">
+          <h5 class="secondtitle">
             {{ block.secondaryTitle }}
-          </span>
+          </h5>
 
+        <!-- text block -->
         {% elseif block.type == "textBlock" %}
           {{ block.textBlock }}
 
+        <!-- image with caption block -->
         {% elseif block.type == "photoBlock" %}
-
           {% set image = block.image.first() %}
           {% if image %}
             <div class="image">
-              <span class="secondtitle text-left">
-                {{ block.secondTitle }}
-                {% if block.imageLink | length %}
-                  - <a href="{{ block.imageLink }}">go to {{ block.secondTitle }}</a>
-                {% endif %}
-              </span>
-              {% if block.imageLink | length %}
-                <a href="{{ block.imageLink }}"><img src="{{ image.getUrl() }}" width="{{ image.getWidth() }}" height="{{ image.getHeight() }}" alt="{{ image.title }}"></a>
-                {% else %}
-                  <img src="{{ image.getUrl() }}" width="{{ image.getWidth() }}" height="{{ image.getHeight() }}" alt="{{ image.title }}">
-              {% endif %}
+              <img src="{{ image.getUrl() }}" width="{{ image.getWidth() }}" height="{{ image.getHeight() }}" alt="{{ image.title }}">
+              <div class="clearfix"></div>
               <span class="caption">{{ block.caption }}</span>
             </div>
           {% endif %}
 
-          {% elseif block.type == "videoBlock" %}
-          {{ block.videoBlock }}
-
+          <!-- quote block -->
           {% elseif block.type == "quoteBlock" %}
             <div class="pullquote">
               <span class="quote">{{ block.quote }}</span>
               <span class="quoteauth">- {{ block.cite }}</span>
             </div>
-
-          {% elseif block.type == "codeBlock" %}
-            {% include 'partials/blog-codeblock' %}
-
           {% endif %}
 
         {% endfor %}
-      </div>
-      <div class="visible-xs-inline-block">
-        <div class="act row">
-          <div class="back col-xs-12 col-sm-6 text-left">
-            <a href="/blog"><i class="fa fa-angle-left"></i>blog list</a>
-          </div>
-          <div class="share col-xs-12 col-sm-6 text-left">
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-slack"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-          </div>
-        </div>
-        <div class="bloglist">
-          <h4>Related Articles</h4>
-          <div class="row">
-            {% for entry in craft.entries.section('blog').find() %}
-              <a href="/blog/{{ entry.slug }}" class="col-xs-12 col-sm-6 post text-center">
-                {% set image = entry.heroImage.first() %}
-                {% if image %}
-                  <img src="{{ image.url }}" alt="" />
-                {% endif %}
-                <h6>{{ entry.title }}</h6>
-              </a>
-            {% endfor %}
-          </div>
-        </div>
-        <div class="meet">
-          <h4>Author</h4>
-          <div class="clearfix"></div>
+      </div><!-- end copy -->
+    </div><!-- end content -->
+    <div class="clearfix"></div>
+  </div>
 
-          {% if entry.author.photoUrl %}
-            <div class="authimage" style="background:url({{ entry.author.photoUrl }}) no-repeat center;background-size:cover;"></div>
-          {% else %}
-            <div class="authimage" style="background:url('/assets/img/theoryThreeShareBox.png') no-repeat center;background-size:cover;"></div>
+  <!-- related articles -->
+  <div class="blog-post-bottom row">
+
+    {% for tag in craft.tags.slug(q).limit(2) %}
+      {% set blogEntries = craft.entries.section('blog').relatedTo(tag).sort('postDate').limit(1) %}
+      <div class="article col-xs-12 col-sm-6">
+
+        {% for entry in blogEntries %}
+          <span class="title">{{ entry.title }}</span>
+          {% set image = entry.thumbnail.first() %}
+            {% if image %}
+              <div class="article-img" style="background-image:url({{ image.url }});background-position:center;background-size:cover;"></div>
+            {% else %}
+            <!-- Fallback to hero image if no thumbnail -->
+            {% set image = entry.heroImage.first() %}
+            {% if image %}
+              <div class="article-img" style="background-image:url({{ image.url }});background-position:center;background-size:cover;"></div>
+            {% endif%}
           {% endif %}
 
-          <div class="clearfix visible-xs-block"></div>
-          <h4>{{ entry.author }}</h4>
+          <span class="subtitle">{{ entry.postDate.format('F d, Y') }}</span>
+          <div class="clearfix"></div>
+          <a href="{{ entry.url }}" class="button">Read More</a>
         </div>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
+        {% endfor %}
 
-  <div class="clearfix"></div>
 
-  <!-- CONTENT SECTION -->
-  <div class="grey">
-    <div class="subscribe">
-      <h4 class="col-xs-12 col-sm-6 hidden-xs">Subscribe to our newsletter</h4>
-      <h4 class="col-xs-12 col-sm-6 visible-xs-inline-block">Subscribe to our newsletter</h4>
-      <div class="input col-xs-12 col-sm-6">
-        <form action="http://theorythreeinteractive.createsend.com/t/r/s/hthlulr/" method="post" id="subForm">
-          <input id="fieldEmail" name="cm-hthlulr-hthlulr" type="email" placeholder="email@email.com" required />
-          <button id="subscribeButton" type="submit" class="bttn med">Subscribe</button>
-        </form>
-      </div>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-
-  {% for tag in craft.tags.slug(q).limit(2) %}
-    {% set blogEntries = craft.entries.section('blog').relatedTo(tag).sort('postDate') %}
-      <span class="title">{{ tag.title }}</span>
-      <ul class="tagList">
-      {% for entry in blogEntries %}
-        <li><span class="subtitle">{{ entry.postDate.format('F d, Y') }}</span><br><a href="{{ entry.url }}">{{ entry.title }}</a></li>
       {% endfor %}
-    </ul>
-  {% endfor %}
+      </div>
 
-  {% for tag in craft.tags.group('blogTags') %}
-    <li><a href="{{ url('blog/tags/'~tag.id) }}">{{ tag.title }}</a></li>
-  {% endfor %}
 
 {% endblock %}
 

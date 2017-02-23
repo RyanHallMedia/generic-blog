@@ -30,12 +30,12 @@ body {
 
  // - - - - - - general styles
 
-   h1 {
-     color: $blue;
-     font-size: 7em;
-     font-weight: 900;
-     letter-spacing: -0.02em;
-   }
+ h1 {
+   color: $blue;
+   font-size: 7em;
+   font-weight: 900;
+   letter-spacing: -0.02em;
+  }
   h2 {
     color: $blue;
     font-size: 4vw;
@@ -81,7 +81,7 @@ body {
     max-width: 450px;
     margin-top: 15px;
   }
-  span.button {
+  .button {
     display: inline-block;
     padding: 10px 25px;
     margin: 15px 0;
@@ -92,6 +92,7 @@ body {
 
     &:hover {
       opacity: 0.85;
+      text-decoration: none;
     }
   }
   .contain {
@@ -145,7 +146,27 @@ header {
     }
   }
 }
+//blog post pages
+header.header-interior {
 
+  .header-text {
+    padding: 150px 85px;
+
+    h1 {
+      font-size: 5vw;
+    }
+  }
+}
+header.split {
+
+  .header-background {
+    width: 50%;
+  }
+  .header-text {
+    width: 50%;
+  }
+}
+// blog list page
 .blog-list {
   padding: 35px 0;
 
@@ -167,6 +188,90 @@ header {
     }
   }
 }
+//blog post
+.blog-post {
+  position: relative;
+
+  .content {
+    max-width: 585px;
+    padding: 15px;
+    margin: 65px auto;
+
+    .image {
+      padding: 35px 0;
+
+      img {
+        max-height: 900px;
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+      }
+      .caption {
+        max-width: 385px;
+        display: block;
+        margin: 10px auto;
+        color: $grey;
+        font-size: 1em;
+        font-weight: 900;
+      }
+    }
+    .pullquote {
+      padding: 35px 0;
+
+      .quote {
+        display: inline-block;
+        color: $green;
+        font-size: 3em;
+        font-weight: 900;
+        line-height: 1.418em;
+        text-align: center;
+      }
+      .quoteauth {
+        width: 100%;
+        display: inline-block;
+        padding: 10px 0;
+        color: $blue;
+        font-size: 1.2em;
+        font-weight: 900;
+        line-height: 1.618em;
+        text-align: right;
+      }
+    }
+    p:first-child:first-letter {
+      padding-top: 5px;
+      padding-right: 5px;
+      float: left;
+      color: $blue;
+      font-size: 4em;
+      line-height: 0.6em;
+    }
+  }
+}
+// blog post bottom
+.blog-post-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .article {
+    text-align: center;
+
+    .title {
+      width: 100%;
+      display: inline-block;
+    }
+    .article-img {
+      height: 150px;
+      width: 100%;
+      max-width: 250px;
+      display: inline-block;
+    }
+    span {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+}
+
 //end footer styles
 
 @media (min-width: 1600px) {

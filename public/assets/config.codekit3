@@ -151,6 +151,22 @@
 		"oF": 0,
 		"opt": 0
 		},
+	"\/img\/blog\/Static-Assets-with-Amazon-s3-1.jpg": {
+		"ft": 16384,
+		"iS": 370461,
+		"oA": 0,
+		"oAP": "\/img\/blog\/Static-Assets-with-Amazon-s3-1.jpg",
+		"oF": 0,
+		"opt": 0
+		},
+	"\/img\/blog\/Static-Assets-with-Amazon-s3.jpg": {
+		"ft": 16384,
+		"iS": 99510,
+		"oA": 0,
+		"oAP": "\/img\/blog\/Static-Assets-with-Amazon-s3.jpg",
+		"oF": 0,
+		"opt": 0
+		},
 	"\/img\/logo.svg": {
 		"ft": 2097152,
 		"miP": 0,

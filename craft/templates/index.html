@@ -22,7 +22,10 @@
 
   <!-- the list -->
   <section class="blog-list contain">
-      {% for entry in craft.entries.section('blog').limit(5).find() %}
+
+		{% paginate craft.entries.section('blog').limit(4) as pageInfo, pageEntries %}
+
+      {% for entry in pageEntries %}
 
 				{% if (loop.index - 1) is divisible by(2) %}
 	        <a href="/blog/{{ entry.slug }}" class="list-item row">
@@ -74,26 +77,29 @@
 					</a>
 					<div class="clearfix"></div>
 					{% endif %}
-
       {% endfor %}
   </section>
 
+
+
+
+
+
+	{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
+
+	{% for page, url in pageInfo.getPrevUrls(5) %}
+	    <a href="{{ url }}">{{ page }}</a>
+	{% endfor %}
+
+	<span class="current">{{ pageInfo.currentPage }}</span>
+
+	{% for page, url in pageInfo.getNextUrls(5) %}
+	    <a href="{{ url }}">{{ page }}</a>
+	{% endfor %}
+
+	{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
+
   {% block pagescripts %}
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $(this).matchHeightOnBoxes();
-      });
-
-      $.fn.matchHeightOnBoxes = function(){
-        var maxHeight = -1;
-        // blog post same height
-        $('a.post .information').each(function(){
-            maxHeight = maxHeight > $(this).height() ? maxHeight : $(this).height();
-        });
-
-        $('a.post .information').height(maxHeight);
-      };
-    </script>
   {% endblock %}
 
 {% endblock %}
