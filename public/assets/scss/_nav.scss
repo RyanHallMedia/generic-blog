@@ -57,5 +57,26 @@ nav {
 
 } /* @media */
 @media (max-width: 768px){
+  nav {
 
+    a.nav-image {
+      width: 100%;
+      text-align: center;
+
+      img {
+        height: 45px;
+      }
+    }
+    ul.nav-list {
+      width: 268px;
+      padding: 0;
+      margin: 0 auto;
+      float: none;
+
+      li.nav-item a {
+        padding: 10px;
+        font-size: 0.8em;
+      }
+    }
+  }
 } /* @media */

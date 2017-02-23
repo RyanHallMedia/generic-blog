@@ -131,6 +131,7 @@ header {
     h1 {
       display: inline-block;
       color: $blue;
+      font-size: 7vw;
     }
     h4 {
       margin-top: 15px;
@@ -223,6 +224,16 @@ header.split {
     padding: 15px;
     margin: 65px auto;
 
+    .back a {
+      color: $green;
+      position: relative;
+      bottom: 35px;
+
+      i {
+        position: relative;
+        right: 15px;
+      }
+    }
     .image {
       padding: 35px 0;
 
@@ -325,7 +336,7 @@ header.split {
       color: $green;
       position: absolute;
       right: 15px;
-      bottom: 10px;
+      bottom: 20px;
 
       i {
         font-size: 1.4em;
@@ -426,5 +437,52 @@ footer {
 
 } /* @media */
 @media (max-width: 768px){
+  header {
+    padding-top: 125px;
+  }
+  header .header-text {
+    max-width: 1200px;
+    padding: 150px 45px;
+    position: relative;
+    z-index: 2;
+  }
+  header.header-main .header-text {
+    padding: 65px 45px 150px 45px;
+  }
+  header.split {
+    flex-direction: column;
 
+    .header-background {
+      height: 285px;
+      width: 100%;
+    }
+    .header-text {
+      width: 100%;
+      padding: 50px 65px;
+    }
+  }
+  h4 {
+    font-size: 1.2em;
+  }
+  .blog-list a.list-item {
+    flex-direction: column;
+
+    .list-item-img {
+      min-height: 350px;
+      width: calc(100% - 30px);
+      margin: 0 auto;
+    }
+  }
+  footer {
+    text-align: center;
+
+    .info {
+      width: 100%;
+    }
+    .social {
+      width: 100%;
+      padding-top: 35px;
+      text-align: center;
+    }
+  }
 } /* @media */

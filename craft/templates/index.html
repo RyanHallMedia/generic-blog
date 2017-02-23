@@ -28,7 +28,7 @@
       {% for entry in pageEntries %}
 
 				{% if (loop.index - 1) is divisible by(2) %}
-	        <a href="/blog/{{ entry.slug }}" class="list-item row scrollme">
+	        <a href="/blog/{{ entry.slug }}" class="list-item right row scrollme">
 	          {% set image = entry.thumbnail.first() %}
 	          {% if image %}
 	            <div class="list-item-img col-xs-12 col-sm-6 animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="-200" data-scale="0.8" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
@@ -53,8 +53,19 @@
 			    <div class="clearfix"></div>
 					{% else %}
 
-					<a href="/blog/{{ entry.slug }}" class="list-item row scrollme">
-						<div class="information col-xs-12 col-sm-6">
+					<a href="/blog/{{ entry.slug }}" class="list-item left row scrollme">
+            {% set image = entry.thumbnail.first() %}
+						{% if image %}
+							<div class="list-item-img col-xs-12 col-sm-6 col-sm-push-6 animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="200" data-scale="0.8" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+							{% else %}
+								<!-- Fallback to hero image if no thumbnail -->
+								{% set image = entry.heroImage.first() %}
+								{% if image %}
+									<div class="list-item-img col-xs-12 col-sm-6 col-sm-push-6 animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="200" data-scale="0.8" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
+								{% endif%}
+
+							{% endif %}
+						<div class="information col-xs-12 col-sm-6 col-sm-pull-6">
 							<h3 class="animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="-150">{{ entry.postTitle }}</h3>
 							<div class="clearfix"></div>
 							<h6 class="animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="-200">{{ entry.ert }} min read</h6>
@@ -63,17 +74,6 @@
 							</p>
 							<span class="button animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatey="350">Read More</span>
 						</div>
-						{% set image = entry.thumbnail.first() %}
-						{% if image %}
-							<div class="list-item-img col-xs-12 col-sm-6 animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="200" data-scale="0.8" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
-							{% else %}
-								<!-- Fallback to hero image if no thumbnail -->
-								{% set image = entry.heroImage.first() %}
-								{% if image %}
-									<div class="list-item-img col-xs-12 col-sm-6 animateme" data-when="enter" data-from="0.6" data-to="0" data-opacity="0" data-translatex="200" data-scale="0.8" style="background:url({{ image.url }}) no-repeat center;background-size:cover;"></div>
-								{% endif%}
-
-							{% endif %}
 					</a>
 					<div class="clearfix"></div>
 					{% endif %}
