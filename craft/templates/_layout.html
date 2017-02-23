@@ -20,7 +20,7 @@
 		<link rel="shortcut icon" href="favicon.ico">
 
 		<!-- googlefonts (playfair, roboto) -->
-		<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Roboto:400,900" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet">
 
 		<!-- icon font (sorry guys) -->
 		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
@@ -67,8 +67,16 @@
 			{% block content %}
 			{% endblock %}
 
-			<footer>
-				Copyright {{ now.year }} | Ryan Hall Media | All rights reserved
+			<footer class="row">
+				<div class="info col-xs-12 col-sm-6 col-md-5 col-md-offset-1">
+					Copyright {{ now.year }} | Design By Cosmic | All rights reserved
+				</div>
+				<div class="social col-xs-12 col-sm-6 col-md-5 text-right">
+					<a href="https://twitter.com/ryanhallmedia" target="_blank"><i class="fa fa-twitter"></i></a>
+          <a href="https://facebook.com/ryanhallmedia" target="_blank"><i class="fa fa-facebook"></i></a>
+          <a href="https://behance.net/ryanhallmedia" target="_blank"><i class="fa fa-behance"></i></a>
+          <a href="http://codepen.io/RyanHallMedia/" target="_blank"><i class="fa fa-codepen"></i></a>
+				</div>
 			</footer>
 		</div>
 

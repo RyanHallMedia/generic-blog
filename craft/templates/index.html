@@ -23,7 +23,7 @@
   <!-- the list -->
   <section class="blog-list contain">
 
-		{% paginate craft.entries.section('blog').limit(4) as pageInfo, pageEntries %}
+		{% paginate craft.entries.section('blog').limit(3) as pageInfo, pageEntries %}
 
       {% for entry in pageEntries %}
 
@@ -80,24 +80,24 @@
       {% endfor %}
   </section>
 
+	<div class="paginate">
 
+		{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}" class="change">Last</a>{% endif %}
 
+		{% for page, url in pageInfo.getPrevUrls(5) %}
+		    <a href="{{ url }}" class="num">{{ page }}</a>
+		{% endfor %}
 
+		<span class="current">{{ pageInfo.currentPage }}</span>
 
+		{% for page, url in pageInfo.getNextUrls(5) %}
+		    <a href="{{ url }}" class="num">{{ page }}</a>
+		{% endfor %}
 
-	{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
+		{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}" class="change">Next</a>{% endif %}
 
-	{% for page, url in pageInfo.getPrevUrls(5) %}
-	    <a href="{{ url }}">{{ page }}</a>
-	{% endfor %}
+	</div>
 
-	<span class="current">{{ pageInfo.currentPage }}</span>
-
-	{% for page, url in pageInfo.getNextUrls(5) %}
-	    <a href="{{ url }}">{{ page }}</a>
-	{% endfor %}
-
-	{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 
   {% block pagescripts %}
   {% endblock %}
